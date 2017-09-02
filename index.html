@@ -302,7 +302,8 @@ kag_emffit &lt;- emfactor(kag[1:split_t, ], k, 10, verbose = TRUE)</code></pre>
 <pre><code>## [1] &quot;iteration 1 ...&quot;
 ## [1] &quot;iteration 2 ...&quot;
 ## [1] &quot;iteration 3 ...&quot;
-## [1] &quot;iteration 4 ...&quot;</code></pre>
+## [1] &quot;iteration 4 ...&quot;
+## [1] &quot;iteration 5 ...&quot;</code></pre>
 <p>Finally, we perform out of sample predictions and evaluate performance.</p>
 <pre class="r"><code>g &lt;- solve(diag(rep(1, k)) + t(kag_emffit$w) %*% diag(1/kag_emffit$psi) %*% kag_emffit$w)
 to_predict &lt;- kag[out_idx, stocks_to_predict]
@@ -323,8 +324,8 @@ diff &lt;- to_predict[obs_logi] - mean(to_predict[obs_logi])
 R2 &lt;- 1-sum(error * error)/sum(diff * diff)
 var_explained &lt;- max(-1, sign(R2) * sqrt(abs(R2)))
 print(var_explained)</code></pre>
-<pre><code>## [1] 0.178358</code></pre>
-<p>So we see that we can explain ~23% of the variance of unobserved stocks from the concurrent stock returns using only 2 latent dimensions. Given we are dealing with 500 stocks split 50-50 between unobserved and observed, this is a powerful result worth investigating. It is no surprise factor models are so prevalent in the financial industry.</p>
+<pre><code>## [1] 0.2034312</code></pre>
+<p>So we see that we can explain ~20% of the variance of unobserved stocks from the concurrent stock returns using only 2 latent dimensions. Given we are dealing with 500 stocks split 50-50 between unobserved and observed, this is a powerful result worth investigating. It is no surprise factor models are so prevalent in the financial industry.</p>
 <p><a href="#top">Back to Top</a></p>
 <p><a id="what"></a></p>
 </div>
